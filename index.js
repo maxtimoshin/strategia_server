@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.post("/test", (req, res) => {
+app.post("/createOrder", (req, res) => {
   const { company, name, jobTitle, phone, email, option } = req.body;
   try {
     createOrder(company, name, jobTitle, phone, email, option);

@@ -6,14 +6,6 @@ const token = process.env.TOKEN;
 const url = process.env.URL;
 
 export const createOrder = (company, name, jobTitle, phone, email, option) => {
-  console.log(
-    typeof company,
-    typeof name,
-    typeof jobTitle,
-    typeof phone,
-    typeof email,
-    typeof option
-  );
   let requestBody = {
     source_id: 1,
     buyer_comment: `
