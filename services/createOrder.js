@@ -19,7 +19,7 @@ Service:  ${option}
       phone: phone,
     },
   };
-  fetch(url, {
+  fetch(`${url}/order`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,

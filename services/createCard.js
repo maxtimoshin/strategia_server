@@ -23,7 +23,7 @@ Service:  ${option}
     },
   };
 
-  fetch(url, {
+  fetch(`${url}/pipelines/cards`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
