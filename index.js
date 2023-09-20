@@ -1,6 +1,7 @@
 import express from "express";
 import "dotenv/config";
 import { createOrder } from "./services/createOrder.js";
+import { createCard } from "./services/createCard.js";
 import cors from "cors";
 import bodyParser from "body-parser";
 
@@ -19,7 +20,8 @@ app.get("/", (req, res) => {
 app.post("/createOrder", (req, res) => {
   const { company, name, jobTitle, phone, email, option } = req.body;
   try {
-    createOrder(company, name, jobTitle, phone, email, option);
+    // createOrder(company, name, jobTitle, phone, email, option);
+    createCard(company, name, jobTitle, phone, email, option);
     res.status(200).send("Order creation request sent successfully.");
   } catch (error) {
     res.status(500).send("Error creating order: " + error.message);
