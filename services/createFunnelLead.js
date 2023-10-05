@@ -5,7 +5,16 @@ import { generateId } from "./generateId.js";
 const token = process.env.TOKEN;
 const url = process.env.URL;
 
-export const createCard = (company, name, jobTitle, phone, email, option) => {
+export const createFunnelLead = ({
+  company = "",
+  name,
+  jobTitle = "",
+  phone,
+  email,
+  option = "",
+  telegramId = 1,
+  funnelId,
+}) => {
   let requestBody = {
     source_id: 1,
     manager_comment: `
@@ -14,7 +23,7 @@ Job title: ${jobTitle}
 Service:  ${option}
     `,
     manager_id: 1,
-    pipeline_id: 1,
+    pipeline_id: funnelId,
     contact: {
       full_name: name,
       email: email,
