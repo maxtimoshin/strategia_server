@@ -16,9 +16,9 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.post("/createOrder", (req, res) => {
+app.post("/createOrder", async (req, res) => {
   try {
-    createFunnelLead(req.body);
+    await createFunnelLead(req.body);
     res.status(200).send("Order creation request sent successfully.");
   } catch (error) {
     res.status(500).send("Error creating order: " + error.message);
