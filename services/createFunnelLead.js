@@ -74,54 +74,106 @@ export const createFunnelLead = ({
   phone,
   email,
   option = "",
-  telegramId = 1,
   funnelId,
+  coursePrice,
 }) => {
-  return new Promise((resolve, reject) => {
-    let requestBody = {
-      source_id: 1,
-      manager_comment: `
-        Company: ${company}
-        Job title: ${jobTitle}
-        Service: ${option}
-      `,
-      manager_id: 1,
-      pipeline_id: funnelId,
-      contact: {
-        full_name: name,
-        email: email,
-        phone: phone,
-        client_id: null,
-      },
-    };
+  if (funnelId === 2) {
+    // create agency lead
+    return new Promise((resolve, reject) => {
+      let requestBody = {
+        source_id: 1,
+        manager_comment: `
+          Company: ${company}
+          Job title: ${jobTitle}
+          Service: ${option}
+        `,
+        manager_id: 1,
+        pipeline_id: funnelId,
+        contact: {
+          full_name: name,
+          email: email,
+          phone: phone,
+          client_id: null,
+        },
+      };
 
-    fetch(`${url}/pipelines/cards`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Cache-Control": "no-cache",
-        Pragma: "no-cache",
-      },
-      body: JSON.stringify(requestBody),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return Promise.reject({
-            status: response.status,
-            statusText: response.statusText,
-          });
-        }
-        return response.json();
+      fetch(`${url}/pipelines/cards`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Cache-Control": "no-cache",
+          Pragma: "no-cache",
+        },
+        body: JSON.stringify(requestBody),
       })
-      .then((data) => {
-        console.log("Response:", data);
-        resolve(data); // Resolve the promise with the response data
+        .then((response) => {
+          if (!response.ok) {
+            return Promise.reject({
+              status: response.status,
+              statusText: response.statusText,
+            });
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Response:", data);
+          resolve(data); // Resolve the promise with the response data
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          reject(error); // Reject the promise with the error
+        });
+    });
+  }
+
+  if (funnelId === 1) {
+    // create course lead
+    return new Promise((resolve, reject) => {
+      let requestBody = {
+        source_id: 1,
+        manager_comment: `
+          Course price : ${coursePrice}
+        `,
+        manager_id: 1,
+        pipeline_id: funnelId,
+        contact: {
+          full_name: name,
+          email: email,
+          phone: phone,
+          client_id: null,
+        },
+      };
+
+      fetch(`${url}/pipelines/cards`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Cache-Control": "no-cache",
+          Pragma: "no-cache",
+        },
+        body: JSON.stringify(requestBody),
       })
-      .catch((error) => {
-        console.error("Error:", error);
-        reject(error); // Reject the promise with the error
-      });
-  });
+        .then((response) => {
+          if (!response.ok) {
+            return Promise.reject({
+              status: response.status,
+              statusText: response.statusText,
+            });
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Response:", data);
+          resolve(data); // Resolve the promise with the response data
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          reject(error); // Reject the promise with the error
+        });
+    });
+  }
 };

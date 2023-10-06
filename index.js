@@ -12,10 +12,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Routes
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
 app.post("/createOrder", async (req, res) => {
   try {
     await createFunnelLead(req.body);
