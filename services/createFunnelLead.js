@@ -76,6 +76,7 @@ export const createFunnelLead = ({
   option = "",
   funnelId,
   coursePrice,
+  telegramId,
 }) => {
   if (funnelId === 2) {
     // create agency lead
@@ -132,9 +133,10 @@ export const createFunnelLead = ({
     // create course lead
     return new Promise((resolve, reject) => {
       let requestBody = {
-        source_id: 1,
+        source_id: 3,
         manager_comment: `
           Course price : ${coursePrice}
+          Telegram : ${telegramId}
         `,
         manager_id: 1,
         pipeline_id: funnelId,
